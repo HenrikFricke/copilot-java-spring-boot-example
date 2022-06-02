@@ -1,0 +1,16 @@
+
+spring:
+    datasource:
+        url: jdbc:postgresql://localhost:5432/events
+        username: postgres
+        password: admin
+    jpa:
+        hibernate:
+            ddl-auto: update
+        database-platform: org.hibernate.dialect.PostgreSQLDialect
+    devtools:
+        livereload:
+            port: 35730
+
+server:
+    port: 8081

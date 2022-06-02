@@ -10,10 +10,10 @@ services:
     volumes:
       - db:/var/lib/postgresql/data
 
-  order-service:
+  tutorials:
     build:
       context: ./
-      dockerfile: Dockerfile.local
+      dockerfile: apps/tutorials/Dockerfile.local
     env_file: ./.env
     depends_on:
       - db
