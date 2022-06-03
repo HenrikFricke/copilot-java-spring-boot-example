@@ -13,7 +13,7 @@ public class Event {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @Column(name = "identifier")
+    @Column(name = "identifier", updatable = false)
     @NotNull
     private String identifier;
 
@@ -26,6 +26,7 @@ public class Event {
     protected Event() {
         this.identifier = "test.identifier";
     }
+
     public Event(String identifier) {
         this.identifier = identifier;
     }

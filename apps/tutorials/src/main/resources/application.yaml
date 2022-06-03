@@ -1,4 +1,6 @@
 spring:
+  application:
+    name: tutorials
   datasource:
     url: jdbc:postgresql://localhost:5432/tutorials
     username: postgres
@@ -8,3 +10,18 @@ spring:
     hibernate:
       ddl-auto: update
     database-platform: org.hibernate.dialect.PostgreSQLDialect
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
+
+logging:
+  level:
+    com.henrickfricke.tutorials.client.EventClient: DEBUG
+
+feign:
+  client:
+    config:
+      default:
+        loggerLevel: FULL

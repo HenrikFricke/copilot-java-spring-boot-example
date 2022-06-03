@@ -22,13 +22,14 @@ public class EventsController {
     @GetMapping("/events")
     public ResponseEntity<List<Event>> list() {
         var events = eventsRepository.findAll();
-
+        if (events.isEmpty()) {
+            return new ResponseEntity<List<Event>>(HttpStatus.NO_CONTENT);
+        }
         return ResponseEntity.ok(events);
     }
 
     @PostMapping("/events")
-    public ResponseEntity<Event> create(@RequestParam String identifier) {
-        var e = new Event(identifier);
-        return new ResponseEntity<>(eventsRepository.save(e), HttpStatus.CREATED);
+    public ResponseEntity<Event> create(@RequestBody Event event) {
+        return new ResponseEntity<>(eventsRepository.save(event), HttpStatus.CREATED);
     }
 }
