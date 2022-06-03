@@ -6,29 +6,63 @@ services:
     restart: always
     env_file: ./.env
     ports:
-      - 5432:5432
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: admin
     volumes:
       - db:/var/lib/postgresql/data
+      - ./initdb:/docker-entrypoint-initdb.d/
 
-  tutorials:
+  eureka:
     build:
       context: ./
-      dockerfile: apps/tutorials/Dockerfile.local
+      dockerfile: Dockerfile.local
+      args:
+        APP: eureka
     env_file: ./.env
     depends_on:
       - db
     ports:
-      - 8080:8080
-      - 35729:35729
+      - "8761:8761"
+      - "35728:35728"
     volumes:
       - ./:/app
-      - .m2:/root/.m2
-    environment:
-      SPRING_APPLICATION_JSON: '{
-        "spring.datasource.url": "jdbc:postgresql://db:5432/$POSTGRES_DB",
-        "spring.datasource.username" : "$POSTGRES_USER",
-        "spring.datasource.password" : "$POSTGRES_PASSWORD"
-      }'
+      - ./apps/eureka/.m2:/root/.m2
+    tty: true
+
+
+  tutorials:
+    build:
+      context: ./
+      dockerfile: Dockerfile.local
+      args:
+        APP: tutorials
+    env_file: ./.env
+    depends_on:
+      - db
+    ports:
+      - "8080:8080"
+      - "35729:35729"
+    volumes:
+      - ./:/app
+      - ./apps/tutorials/.m2:/root.m2
+    tty: true
+
+  events:
+    build:
+      context: ./
+      dockerfile: Dockerfile.local
+      args:
+        APP: events
+    env_file: ./.env
+    depends_on:
+      - db
+    ports:
+      - "8081:8081"
+      - "35730:35730"
+    volumes:
+      - ./:/app
+      - ./apps/events/.m2:/root/.m2
     tty: true
 
 volumes:

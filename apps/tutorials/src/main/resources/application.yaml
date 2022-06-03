@@ -2,7 +2,7 @@ spring:
   application:
     name: tutorials
   datasource:
-    url: jdbc:postgresql://localhost:5432/tutorials
+    url: jdbc:postgresql://${DB_HOST:localhost}:5432/tutorials
     username: postgres
     password: admin
 
@@ -16,12 +16,16 @@ eureka:
     serviceUrl:
       defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
 
-logging:
-  level:
-    com.henrickfricke.tutorials.client.EventClient: DEBUG
 
 feign:
   client:
     config:
       default:
-        loggerLevel: FULL
+        loggerLevel: full
+logging:
+  level:
+    feign: INFO
+    com:
+      henrikfricke:
+        tutorials:
+          client: INFO

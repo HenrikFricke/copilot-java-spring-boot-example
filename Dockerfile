@@ -1,7 +1,7 @@
 FROM maven:3.8.5-openjdk-18-slim AS build
 
-COPY pom.xml /build/
-COPY src /build/src/
+COPY apps/tutorials/pom.xml /build/
+COPY apps/tutorials/src /build/src/
 
 WORKDIR /build/
 

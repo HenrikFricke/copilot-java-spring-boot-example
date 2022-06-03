@@ -38,11 +38,6 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>
         </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>events</artifactId>
-            <version>${project.version}</version>
-        </dependency>
 
     </dependencies>
 

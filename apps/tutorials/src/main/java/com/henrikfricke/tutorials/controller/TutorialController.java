@@ -1,17 +1,19 @@
 package com.henrikfricke.tutorials.controller;
 
-import com.henrickfricke.events.model.Event;
 import com.henrikfricke.tutorials.client.EventClient;
 import com.henrikfricke.tutorials.model.Tutorial;
 import com.henrikfricke.tutorials.repository.TutorialRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @RestController
+@Slf4j
 @RequestMapping("/api")
 public class TutorialController {
     final TutorialRepository tutorialRepository;
@@ -51,11 +53,12 @@ public class TutorialController {
 
         try {
             var _tutorial = tutorialRepository.save(tutorial);
-            
-            eventClient.createEvent(new Event("tutorial.created"));
+
+            eventClient.createEvent(Map.ofEntries(Map.entry("bla", "tutorial.created")));
 
             return new ResponseEntity<>(_tutorial, HttpStatus.CREATED);
         } catch (Exception e) {
+            log.error(e.toString());
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
