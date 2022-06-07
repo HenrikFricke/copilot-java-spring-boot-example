@@ -44,7 +44,8 @@ public class TutorialController {
     @GetMapping("/tutorials/{id}")
     public ResponseEntity<Tutorial> getTutorialById(@PathVariable("id") long id) {
         var tutorialData = tutorialRepository.findById(id);
-        return tutorialData.map(tutorial -> new ResponseEntity<>(tutorial, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+        return tutorialData.map(tutorial -> new ResponseEntity<>(tutorial, HttpStatus.OK))
+                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @PostMapping("/tutorials")
@@ -65,7 +66,7 @@ public class TutorialController {
 
     @PutMapping("/tutorials/{id}")
     public ResponseEntity<Tutorial> updateTutorial(@PathVariable("id") long id,
-                                                   @RequestBody Tutorial tutorial) {
+            @RequestBody Tutorial tutorial) {
         var tutorialData = tutorialRepository.findById(id);
         if (tutorialData.isPresent()) {
             Tutorial _tutorial = tutorialData.get();

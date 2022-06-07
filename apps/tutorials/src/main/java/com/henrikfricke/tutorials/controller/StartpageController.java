@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class StartpageController {
     @GetMapping("/")
     public String index(@RequestParam(name = "name", required = false, defaultValue = "World") String name,
-                        Model model) {
+            Model model) {
         model.addAttribute("name", name);
         return "startpage";
     }
