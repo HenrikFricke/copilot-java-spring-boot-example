@@ -16,6 +16,8 @@ WORKDIR /app
 ARG APP
 ENV APP ${APP}
 
+RUN microdnf install jq
 COPY --from=build /build/apps/${APP}/target/${APP}-1.0.0.jar /app/
+COPY ./scripts/start_server.sh /app/start_server.sh
 
-CMD java -jar ${APP}-1.0.0.jar
+CMD ./start_server.sh
