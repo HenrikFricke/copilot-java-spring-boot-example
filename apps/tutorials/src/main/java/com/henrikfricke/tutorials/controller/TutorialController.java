@@ -54,7 +54,7 @@ public class TutorialController {
         try {
             var _tutorial = tutorialRepository.save(tutorial);
 
-            eventClient.createEvent(Map.ofEntries(Map.entry("bla", "tutorial.created")));
+            eventClient.createEvent(Map.ofEntries(Map.entry("identifier", "tutorial.created")));
 
             return new ResponseEntity<>(_tutorial, HttpStatus.CREATED);
         } catch (Exception e) {

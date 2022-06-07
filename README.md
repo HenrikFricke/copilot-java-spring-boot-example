@@ -38,27 +38,16 @@ copilot deploy
 
 The project setup supports different ways to start it.
 
-### All in one
-
-Since it is a multi-module maven spring-boot project you can just do
-
-```bash
-./mvnw spring-boot:run
-```
-
-and all modules will be run locally.
-Make sure you have a local Postgres setup with correct users and tables (see module respective `application.yaml`)
-
 ### Seperated processes locally
 
-If for some reason you only want to start one module, you can do this by leveraging the `--project` flag, e.g. for the
+If for some reason you only want to start one module, you can do this by leveraging the `--projects` flag, e.g. for the
 eureka service:
 
 ```bash
 ./mvnw --projects apps/eureka spring-boot:run
 ```
 
-Same considerations as `All in one` apply.
+Make sure you have a local Postgres setup with correct users and tables (see module respective `application.yaml`)
 
 ### With docker-compose
 
