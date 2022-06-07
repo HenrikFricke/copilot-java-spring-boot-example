@@ -2,7 +2,6 @@ Dockerfile
 Dockerfile.local
 .git
 .gitignore
-.m2
 docker-compose.yml
 copilot
 target
