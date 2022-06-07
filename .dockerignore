@@ -4,3 +4,5 @@ Dockerfile.local
 .gitignore
 .m2
 docker-compose.yml
+copilot
+target
