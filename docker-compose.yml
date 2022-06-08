@@ -37,8 +37,6 @@ services:
       args:
         APP: tutorials
     env_file: ./.env
-    environment:
-      - SERVER_SERVLET_CONTEXT_PATH=/tutorials
     depends_on:
       - db
     ports:
@@ -56,8 +54,6 @@ services:
       args:
         APP: events
     env_file: ./.env
-    environment:
-      - SERVER_SERVLET_CONTEXT_PATH=/events
     depends_on:
       - db
     ports:
