@@ -10,9 +10,9 @@ type: Load Balanced Web Service
 http:
   # Requests to this path will be forwarded to your service.
   # To match all requests you can use the "/" path.
-  path: 'events'
+  path: '/'
   # You can specify a custom health check path. The default is "/".
-  healthcheck: '/events/'
+  healthcheck: '/actuator/health'
 
 # Configuration for your containers and service.
 image:
@@ -32,16 +32,14 @@ exec: true     # Enable running commands in your container.
 # Optional fields for more advanced use-cases.
 #
 variables:
- EUREKA_URI: 'http://eureka.${COPILOT_ENVIRONMENT_NAME}.${COPILOT_APPLICATION_NAME}.local:8761/eureka'
- POSTGRES_CLUSTER_SECRET_NAME: EVENTSCLUSTER_SECRET
- SERVER_SERVLET_CONTEXT_PATH: /events
+  EUREKA_URI: 'http://eureka.${COPILOT_ENVIRONMENT_NAME}.${COPILOT_APPLICATION_NAME}.local:8761/eureka'
+  POSTGRES_CLUSTER_SECRET_NAME: EVENTSCLUSTER_SECRET
 
 #secrets:                      # Pass secrets from AWS Systems Manager (SSM) Parameter Store.
 #  GITHUB_TOKEN: GITHUB_TOKEN  # The key is the name of the environment variable, the value is the name of the SSM parameter.
 
 # You can override any of the values defined above by environment.
-#environments:
-#  test:
-#    count: 2               # Number of tasks to run for the "test" environment.
-#    deployment:            # The deployment strategy for the "test" environment.
-#       rolling: 'recreate' # Stops existing tasks before new ones are started for faster deployments.
+environments:
+  prod:
+    http:
+      alias: events.copilot.superluminar.io
