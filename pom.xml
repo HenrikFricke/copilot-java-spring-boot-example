@@ -57,7 +57,6 @@
     <modules>
         <module>apps/tutorials</module>
         <module>apps/events</module>
-        <module>apps/eureka</module>
     </modules>
 
     <build>

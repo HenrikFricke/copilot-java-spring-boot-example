@@ -13,23 +13,6 @@ services:
       - db:/var/lib/postgresql/data
       - ./initdb:/docker-entrypoint-initdb.d/
 
-  eureka:
-    build:
-      context: ./
-      dockerfile: Dockerfile.local
-      args:
-        APP: eureka
-    env_file: ./.env
-    depends_on:
-      - db
-    ports:
-      - "8761:8761"
-      - "35728:35728"
-    volumes:
-      - ./:/app
-      - ./apps/eureka/.m2:/root/.m2
-    tty: true
-
   tutorials:
     build:
       context: ./
@@ -37,6 +20,8 @@ services:
       args:
         APP: tutorials
     env_file: ./.env
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
     depends_on:
       - db
     ports:
@@ -54,6 +39,8 @@ services:
       args:
         APP: events
     env_file: ./.env
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
     depends_on:
       - db
     ports:

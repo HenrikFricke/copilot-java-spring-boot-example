@@ -5,22 +5,26 @@ spring:
     url: jdbc:postgresql://${DB_HOST:localhost}:5432/tutorials
     username: ${DB_USERNAME:postgres}
     password: ${DB_PASSWORD:admin}
-
+  cloud:
+    discovery:
+      client:
+        simple:
+          instances:
+            events:
+              - uri: http://localhost:8081
+  
   jpa:
     hibernate:
       ddl-auto: update
     database-platform: org.hibernate.dialect.PostgreSQLDialect
 
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
 
 feign:
   client:
     config:
       default:
         loggerLevel: full
+
 logging:
   level:
     feign: INFO
@@ -28,3 +32,7 @@ logging:
       superluminar:
         tutorials:
           client: INFO
+
+server:
+  servlet:
+    context-path: /tutorials
