@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.Map;
 
-@FeignClient(value = "EVENTS", path = "/events/api")
+@FeignClient(value = "EVENTS", path = "/api")
 public interface EventClient {
 
     @PostMapping("/events")
