@@ -3,5 +3,5 @@ Dockerfile.local
 .git
 .gitignore
 docker-compose.yml
-copilot
-target
+copilot/
+**/target/
