@@ -1,0 +1,11 @@
+spring:
+  cloud:
+    discovery:
+      client:
+        simple:
+          instances:
+            events:
+              - uri: "http://events.${COPILOT_SERVICE_DISCOVERY_ENDPOINT}:8081"
+
+server:
+  port: 8080

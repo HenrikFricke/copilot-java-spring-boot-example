@@ -10,9 +10,9 @@ type: Load Balanced Web Service
 http:
   # Requests to this path will be forwarded to your service.
   # To match all requests you can use the "/" path.
-  path: '/'
+  path: '/tutorials'
   # You can specify a custom health check path. The default is "/".
-  healthcheck: '/actuator/health'
+  healthcheck: '/tutorials/actuator/health'
 
 # Configuration for your containers and service.
 image:
@@ -31,9 +31,10 @@ exec: true     # Enable running commands in your container.
 
 # Optional fields for more advanced use-cases.
 #
-variables:                    # Pass environment variables as key value pairs.
- EUREKA_URI: 'http://eureka.${COPILOT_ENVIRONMENT_NAME}.${COPILOT_APPLICATION_NAME}.local:8761/eureka'
- POSTGRES_CLUSTER_SECRET_NAME: TUTORIALSCLUSTER_SECRET
+variables: # Pass environment variables as key value pairs.
+  POSTGRES_CLUSTER_SECRET_NAME: TUTORIALSCLUSTER_SECRET
+  SPRING_PROFILES_ACTIVE: aws
+
 
 #secrets:                      # Pass secrets from AWS Systems Manager (SSM) Parameter Store.
 #  GITHUB_TOKEN: GITHUB_TOKEN  # The key is the name of the environment variable, the value is the name of the SSM parameter.

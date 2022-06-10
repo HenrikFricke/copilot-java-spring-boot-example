@@ -10,9 +10,9 @@ type: Load Balanced Web Service
 http:
   # Requests to this path will be forwarded to your service.
   # To match all requests you can use the "/" path.
-  path: '/'
+  path: '/events'
   # You can specify a custom health check path. The default is "/".
-  healthcheck: '/actuator/health'
+  healthcheck: '/events/actuator/health'
 
 # Configuration for your containers and service.
 image:
@@ -21,7 +21,7 @@ image:
     dockerfile: Dockerfile
     args:
       APP: events  # Port exposed through your container to route traffic to it.
-  port: 8081
+  port: 8080
 
 cpu: 256       # Number of CPU units for the task.
 memory: 512    # Amount of memory in MiB used by the task.
@@ -32,8 +32,8 @@ exec: true     # Enable running commands in your container.
 # Optional fields for more advanced use-cases.
 #
 variables:
-  EUREKA_URI: 'http://eureka.${COPILOT_ENVIRONMENT_NAME}.${COPILOT_APPLICATION_NAME}.local:8761/eureka'
   POSTGRES_CLUSTER_SECRET_NAME: EVENTSCLUSTER_SECRET
+  SPRING_PROFILES_ACTIVE: aws
 
 #secrets:                      # Pass secrets from AWS Systems Manager (SSM) Parameter Store.
 #  GITHUB_TOKEN: GITHUB_TOKEN  # The key is the name of the environment variable, the value is the name of the SSM parameter.
